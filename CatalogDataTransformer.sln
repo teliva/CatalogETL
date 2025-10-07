@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogDataTransformer", "CatalogDataTransformer\CatalogDataTransformer.csproj", "{A43D21C5-1474-4B57-ADC8-60602FB12D77}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KITSProductData", "KITSProductData", "{CF210413-A938-4DD0-9218-8DC4725A1C9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "KITSProductData\Data\Data.csproj", "{12328EF8-54B3-41EC-B039-3A4C3734A1C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "KITSProductData\Repository\Repository.csproj", "{8CABE2B0-922B-4013-AB06-B7E2A2A277B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A43D21C5-1474-4B57-ADC8-60602FB12D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A43D21C5-1474-4B57-ADC8-60602FB12D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A43D21C5-1474-4B57-ADC8-60602FB12D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A43D21C5-1474-4B57-ADC8-60602FB12D77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12328EF8-54B3-41EC-B039-3A4C3734A1C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12328EF8-54B3-41EC-B039-3A4C3734A1C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12328EF8-54B3-41EC-B039-3A4C3734A1C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12328EF8-54B3-41EC-B039-3A4C3734A1C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CABE2B0-922B-4013-AB06-B7E2A2A277B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CABE2B0-922B-4013-AB06-B7E2A2A277B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CABE2B0-922B-4013-AB06-B7E2A2A277B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CABE2B0-922B-4013-AB06-B7E2A2A277B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12328EF8-54B3-41EC-B039-3A4C3734A1C5} = {CF210413-A938-4DD0-9218-8DC4725A1C9D}
+		{8CABE2B0-922B-4013-AB06-B7E2A2A277B6} = {CF210413-A938-4DD0-9218-8DC4725A1C9D}
+	EndGlobalSection
+EndGlobal
