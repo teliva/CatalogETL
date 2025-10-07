@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+
 using Data.Entities;
 
 namespace Data.Contexts;
