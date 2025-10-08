@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Data.Contexts;
 using Repository;
+using CatalogDataTransformer.Models;
 
 public class MainController
 {
@@ -22,10 +23,13 @@ public class MainController
         _kpr = new KITSProductRepository(_context);
     }
 
-    public async Task Fetcher(int catalogId)
+    public async Task GetCatalogById(int catalogId)
     {
         var cat = await _kpr.GetByIdAsync(catalogId);
-        Console.WriteLine(cat?.CatalogName);
+    }
 
+    public async Task GetCatalogNodes(int catalogId)
+    {
+        var cat = await _kpr.GetCatalogTOCList(catalogId);
     }
 }

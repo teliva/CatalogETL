@@ -31,5 +31,14 @@ public class KITSProductContext : DbContext
             entity.HasKey(x => x.CatalogId);
             entity.ToTable("Catalog");
         });
+
+        modelBuilder.Entity<CatalogTOC>(entity =>
+        {
+            entity.HasKey(x => x.NodeId);
+            entity.HasOne(x => x.Catalog)
+            .WithMany(c => c.TOC)
+            .HasForeignKey(x => x.CatalogId);
+            entity.ToTable("Catalog_TOC");
+        });
     }
 }

@@ -22,4 +22,11 @@ public class KITSProductRepository : IKITSProductRepository
     {
         return await _context.Catalog.FindAsync(catalogId);
     }
+
+    public async Task<IList<CatalogTOC>> GetCatalogTOCList(int catalogId)
+    {
+        return await _context.CatalogTOC
+        .Where(t => t.CatalogId == catalogId)
+        .ToListAsync();
+    }
 }

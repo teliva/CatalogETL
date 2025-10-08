@@ -1,19 +1,33 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 
-Console.WriteLine("Catalog Data Transformer Initialized.");
-
-var config = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory()) // where to look for appsettings.json
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build();
-
-var connectionString = config.GetConnectionString("KITSProduct");
-
-if (connectionString.IsNullOrEmpty())
+try
 {
-    Console.WriteLine("No connection string provided");
+    var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory()) // where to look for appsettings.json
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+    string connectionString = config.GetConnectionString("KITSProduct")
+    ?? throw new ArgumentException("No connection string", nameof(connectionString));
+
+    MainController mc = new MainController(connectionString);
+    await mc.GetCatalogById(1479000001);
+    await mc.GetCatalogNodes(1479000001);
+    Environment.ExitCode = (int)ExitCodes.Success;
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+    Console.WriteLine(e.StackTrace);
+    Environment.ExitCode = (int)ExitCodes.InvalidArguments;
 }
 
-MainController mc = new MainController(connectionString);
-await mc.Fetcher(1479000001);
+
+
+enum ExitCodes
+{
+    Success = 0,
+    InvalidArguments = 1,
+    NotFound = 2,
+    UnexpectedError = 10
+}
