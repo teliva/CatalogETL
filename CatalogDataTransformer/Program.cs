@@ -12,7 +12,7 @@ try
 
     MainController mc = new MainController(connectionString);
     await mc.GetCatalogById(1479000001);
-    await mc.GetCatalogNodes(1479000001);
+    var ans = await mc.GetCatalogNodes(1479000001);
     Environment.ExitCode = (int)ExitCodes.Success;
 }
 catch (Exception e)

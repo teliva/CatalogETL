@@ -11,5 +11,6 @@ public class CatalogTOC
     public int Right { get; set; }
     public Guid Guid { get; set; }
     public string GroupLabel { get; set; } = string.Empty;
-    public ICollection<TOCProduct> TOCProducts { get;set; } = new List<TOCProduct>();
+    public ICollection<TOCProduct> TOCProducts { get; set; } = new List<TOCProduct>();
+    public ICollection<CatalogTOC> TOCNodes { get;set; } = new List<CatalogTOC>();
 }

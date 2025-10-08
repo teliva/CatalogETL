@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Data.Contexts;
 using Repository;
 using CatalogDataTransformer.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using CatalogDataTransformer.Maps;
 
 public class MainController
 {
@@ -28,8 +30,9 @@ public class MainController
         var cat = await _kpr.GetByIdAsync(catalogId);
     }
 
-    public async Task GetCatalogNodes(int catalogId)
+    public async Task<IList<CatalogDataTransformer.Models.CatalogTOC>> GetCatalogNodes(int catalogId)
     {
         var cat = await _kpr.GetCatalogTOCList(catalogId);
+        return CatalogMapper.ToDomain(cat);
     }
 }
