@@ -42,5 +42,4 @@ public class Product
     public string? guid { get; set; }
     [ForeignKey("CatalogId")]
     public virtual Catalog? Catalog { get; set; }
-    public ICollection<TOCProduct> TOCProducts { get; set; } = new List<TOCProduct>();
 }

@@ -48,9 +48,9 @@ public class KITSProductContext : DbContext
                   .WithMany(c => c.TOC)
                   .HasForeignKey(x => x.CatalogId);
 
-            entity.HasMany(x => x.TOCProducts)
-                  .WithOne(tp => tp.CatalogTOC)
-                  .HasForeignKey(tp => tp.NodeId);
+            // entity.HasMany(x => x.TOCProducts)
+            //       .WithOne(tp => tp.CatalogTOC)
+            //       .HasForeignKey(tp => tp.NodeId);
         });
 
         // TOCProduct
@@ -60,9 +60,9 @@ public class KITSProductContext : DbContext
 
             entity.HasKey(x => new { x.ProductId, x.NodeId });
 
-            entity.HasOne(tp => tp.CatalogTOC)
-                  .WithMany(toc => toc.TOCProducts)
-                  .HasForeignKey(tp => tp.NodeId);
+            // entity.HasOne(tp => tp.CatalogTOC)
+            //       .WithMany(toc => toc.TOCProducts)
+            //       .HasForeignKey(tp => tp.NodeId);
 
             entity.HasOne(tp => tp.Product)
                   .WithMany(p => p.TOCProducts)

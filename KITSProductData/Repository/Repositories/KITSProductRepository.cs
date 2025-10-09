@@ -28,6 +28,7 @@ public class KITSProductRepository : IKITSProductRepository
         return await _context.CatalogTOC
         .Where(t => t.CatalogId == catalogId)
         .Include(t => t.TOCProducts)
+        .ThenInclude(tp => tp.Product)
         .ToListAsync();
     }
 }

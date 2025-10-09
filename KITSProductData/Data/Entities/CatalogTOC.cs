@@ -21,6 +21,5 @@ public class CatalogTOC
     public string? Guid { get; set; }
     [MaxLength(255)]
     public string? GroupLabel { get; set; }
-    public required Catalog Catalog { get; set; }
     public IList<TOCProduct> TOCProducts { get; set; } = new List<TOCProduct>();
 }

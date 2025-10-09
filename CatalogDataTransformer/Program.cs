@@ -3,7 +3,7 @@
 try
 {
     var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory()) // where to look for appsettings.json
+                .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
