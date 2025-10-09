@@ -11,8 +11,9 @@ try
     ?? throw new ArgumentException("No connection string", nameof(connectionString));
 
     MainController mc = new MainController(connectionString);
-    await mc.GetCatalogById(1479000001);
+
     var ans = await mc.GetCatalogNodes(1479000001);
+
     Environment.ExitCode = (int)ExitCodes.Success;
 }
 catch (Exception e)
@@ -21,8 +22,6 @@ catch (Exception e)
     Console.WriteLine(e.StackTrace);
     Environment.ExitCode = (int)ExitCodes.InvalidArguments;
 }
-
-
 
 enum ExitCodes
 {

@@ -10,7 +10,6 @@ public class CatalogTOC
     public int NodeId { get; set; }
     public int CatalogId { get; set; }
     public int ParentId { get; set; }
-
     [MaxLength(128)]
     public string NodeName { get; set; } = string.Empty;
     public byte Depth { get; set; }
@@ -23,4 +22,5 @@ public class CatalogTOC
     [MaxLength(255)]
     public string? GroupLabel { get; set; }
     public required Catalog Catalog { get; set; }
+    public ICollection<TOCProduct> TOCProducts { get; set; } = new List<TOCProduct>();
 }
