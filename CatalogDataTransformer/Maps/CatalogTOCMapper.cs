@@ -1,35 +1,51 @@
-using CatalogDataTransformer.Models;
-using Data.Entities;
-
 namespace CatalogDataTransformer.Maps;
 
 public static class CatalogMapper
 {
     public static IList<Models.CatalogTOC> ToDomain(IList<Data.Entities.CatalogTOC> catalogTOCs)
     {
+        if (catalogTOCs == null || catalogTOCs.Count == 0)
+            return new List<Models.CatalogTOC>();
+
         var lookup = catalogTOCs.ToDictionary(n => n.NodeId, n => new Models.CatalogTOC
         {
             NodeId = n.NodeId,
             NodeName = n.NodeName,
-            
-
+            TOCProducts = ToDomain(n.TOCProducts),
+            ParentId = n.ParentId,
+            Left = n.Left,
+            Right = n.Right
         });
 
-        List<Models.CatalogTOC> roots = new();
+        var roots = catalogTOCs
+            .Where(n => n.ParentId == 0)
+            .Select(n => lookup[n.NodeId])
+            .ToList();
 
-        foreach (var catalogTOC in catalogTOCs)
+        foreach (var node in catalogTOCs.Where(n => n.ParentId != 0))
         {
-            if (catalogTOC.ParentId == 0)
+            if (lookup.TryGetValue(node.ParentId, out var parent))
             {
-                // Root node
-                roots.Add(lookup[catalogTOC.NodeId]);
-            }
-            else if (lookup.TryGetValue(catalogTOC.ParentId, out var parent))
-            {
-                parent.TOCNodes.Add(lookup[catalogTOC.NodeId]);
+                parent.TOCNodes.Add(lookup[node.NodeId]);
             }
         }
 
         return roots;
     }
+
+    public static Models.TOCProduct ToDomain(Data.Entities.TOCProduct tocProduct)
+    {
+        return new Models.TOCProduct
+        {
+            ProductId = tocProduct.ProductId,
+            NodeId = tocProduct.NodeId,
+            SeqNo = tocProduct.SeqNo
+        };
+    }
+
+    public static IList<Models.TOCProduct> ToDomain(IList<Data.Entities.TOCProduct> tocProducts) =>
+        tocProducts?.Select(ToDomain)
+                    .Where(p => p != null)
+                    .ToList()
+        ?? new List<Models.TOCProduct>();
 }

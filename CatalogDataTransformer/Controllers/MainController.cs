@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Data.Contexts;
 using Repository;
 using CatalogDataTransformer.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using CatalogDataTransformer.Maps;
 
 public class MainController

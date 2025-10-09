@@ -26,7 +26,8 @@ public class KITSProductRepository : IKITSProductRepository
     public async Task<IList<CatalogTOC>> GetCatalogTOCList(int catalogId)
     {
         return await _context.CatalogTOC
-        .Where(t => t.CatalogId == catalogId)   
+        .Where(t => t.CatalogId == catalogId)
+        .Include(t => t.TOCProducts)
         .ToListAsync();
     }
 }

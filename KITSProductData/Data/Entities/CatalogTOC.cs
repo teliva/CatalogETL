@@ -22,5 +22,5 @@ public class CatalogTOC
     [MaxLength(255)]
     public string? GroupLabel { get; set; }
     public required Catalog Catalog { get; set; }
-    public ICollection<TOCProduct> TOCProducts { get; set; } = new List<TOCProduct>();
+    public IList<TOCProduct> TOCProducts { get; set; } = new List<TOCProduct>();
 }
