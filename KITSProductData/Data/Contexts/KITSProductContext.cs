@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-
 using Data.Entities;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Data.Contexts;
 
@@ -34,7 +32,7 @@ public class KITSProductContext : DbContext
             entity.ToTable("Catalog");
 
             entity.HasMany(c => c.TOC)
-                  .WithOne(t => t.Catalog)
+                  .WithOne()
                   .HasForeignKey(t => t.CatalogId);
         });
 
@@ -43,14 +41,6 @@ public class KITSProductContext : DbContext
         {
             entity.ToTable("Catalog_TOC");
             entity.HasKey(x => x.NodeId);
-
-            entity.HasOne(x => x.Catalog)
-                  .WithMany(c => c.TOC)
-                  .HasForeignKey(x => x.CatalogId);
-
-            // entity.HasMany(x => x.TOCProducts)
-            //       .WithOne(tp => tp.CatalogTOC)
-            //       .HasForeignKey(tp => tp.NodeId);
         });
 
         // TOCProduct
@@ -60,13 +50,21 @@ public class KITSProductContext : DbContext
 
             entity.HasKey(x => new { x.ProductId, x.NodeId });
 
-            // entity.HasOne(tp => tp.CatalogTOC)
-            //       .WithMany(toc => toc.TOCProducts)
-            //       .HasForeignKey(tp => tp.NodeId);
-
             entity.HasOne(tp => tp.Product)
-                  .WithMany(p => p.TOCProducts)
+                  .WithMany()
                   .HasForeignKey(tp => tp.ProductId);
+        });
+
+        // Product
+        modelBuilder.Entity<Product>(entity =>
+        {
+            entity.ToTable("Product");
+
+            entity.HasKey(x => x.ProductId);
+
+            entity.HasOne(p => p.CatalogGenericDescription)
+            .WithMany()
+            .HasForeignKey(p => p.DescriptionId);
         });
     }
 }

@@ -29,6 +29,7 @@ public class KITSProductRepository : IKITSProductRepository
         .Where(t => t.CatalogId == catalogId)
         .Include(t => t.TOCProducts)
         .ThenInclude(tp => tp.Product)
+        .ThenInclude(t => t.CatalogGenericDescription)
         .ToListAsync();
     }
 }

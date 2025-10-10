@@ -1,8 +1,7 @@
 namespace CatalogDataTransformer.Models;
 
-public class TOCProduct
+public class TOCProduct : Product
 {
-    public int ProductId { get; set; }
     public int NodeId { get; set; }
     public short SeqNo { get; set; }
 }

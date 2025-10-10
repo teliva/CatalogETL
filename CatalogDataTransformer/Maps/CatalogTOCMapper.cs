@@ -39,7 +39,10 @@ public static class CatalogMapper
         {
             ProductId = tocProduct.ProductId,
             NodeId = tocProduct.NodeId,
-            SeqNo = tocProduct.SeqNo
+            SeqNo = tocProduct.SeqNo,
+            ModelNumber = tocProduct.Product.StyleNumber,
+            Description = tocProduct.Product.CatalogGenericDescription?.Description ?? string.Empty,
+            EnhancedDescription = tocProduct.Product.CatalogGenericDescription?.Description ?? string.Empty
         };
     }
 
