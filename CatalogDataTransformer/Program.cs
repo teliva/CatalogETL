@@ -11,8 +11,7 @@ try
     ?? throw new ArgumentException("No connection string", nameof(connectionString));
 
     MainController mc = new MainController(connectionString);
-
-    var ans = await mc.GetCatalogNodes(1479000001);
+    var ans = await mc.GetCatalogNodes(1479000001); // Sample KFI catalog, this ID is liable to change
 
     Environment.ExitCode = (int)ExitCodes.Success;
 }
