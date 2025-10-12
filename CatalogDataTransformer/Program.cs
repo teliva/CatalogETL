@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Text.Json;
+using Microsoft.Extensions.Configuration;
 
 try
 {
@@ -12,6 +13,8 @@ try
 
     MainController mc = new MainController(connectionString);
     var ans = await mc.GetCatalogNodes(1479000001); // Sample KFI catalog, this ID is liable to change
+    string jsonString = JsonSerializer.Serialize(ans);
+    Console.WriteLine(jsonString);
 
     Environment.ExitCode = (int)ExitCodes.Success;
 }

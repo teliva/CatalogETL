@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\KITSProductData\Data\Data.csproj" />
     <ProjectReference Include="..\KITSProductData\Repository\Repository.csproj" />
+    <ProjectReference Include="..\MongoDAL\MongoDAL\MongoDAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
