@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 namespace CatalogDataTransformer.Maps;
 
 public static class CatalogMapper
@@ -44,6 +46,25 @@ public static class CatalogMapper
             Description = tocProduct.Product.CatalogGenericDescription?.Description ?? string.Empty,
             EnhancedDescription = tocProduct.Product.CatalogGenericDescription?.Description ?? string.Empty
         };
+    }
+
+    public static Models.Product ToDomain(Data.Entities.Product p)
+    {
+        return new Models.Product
+        {
+            ProductId = p.ProductId,
+            ModelNumber = p.StyleNumber,
+            Description = p.CatalogGenericDescription.Description,
+            EnhancedDescription = p.CatalogGenericDescription.EnhancedDescription
+        };
+    }
+
+    public static IList<Models.Product> ToDomain(IList<Data.Entities.Product> products)
+    {
+        return products?.Select(ToDomain)
+        .Where(p => p != null)
+        .ToList()
+        ?? new List<Models.Product>();
     }
 
     public static IList<Models.TOCProduct> ToDomain(IList<Data.Entities.TOCProduct> tocProducts) =>

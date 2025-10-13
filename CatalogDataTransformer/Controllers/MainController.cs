@@ -34,4 +34,10 @@ public class MainController
         var cat = await _kpr.GetCatalogTOCList(catalogId);
         return CatalogMapper.ToDomain(cat);
     }
+
+    public async Task<IList<CatalogDataTransformer.Models.Product>> GetCatalogProducts(int catalogId)
+    {
+        var products = await _kpr.GetProductsByCatalog(catalogId);
+        return CatalogMapper.ToDomain(products);
+    }
 }

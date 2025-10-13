@@ -1,4 +1,5 @@
-﻿using Data.Contexts;
+﻿using System.Security;
+using Data.Contexts;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +31,14 @@ public class KITSProductRepository : IKITSProductRepository
         .Include(t => t.TOCProducts)
         .ThenInclude(tp => tp.Product)
         .ThenInclude(t => t.CatalogGenericDescription)
+        .ToListAsync();
+    }
+
+    public async Task<IList<Product>> GetProductsByCatalog(int catalogId)
+    {
+        return await _context.Product
+        .Where(p => p.CatalogId == catalogId)
+        .Include(p => p.CatalogGenericDescription)
         .ToListAsync();
     }
 }

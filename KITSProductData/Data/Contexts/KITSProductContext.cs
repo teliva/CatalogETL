@@ -8,6 +8,7 @@ public class KITSProductContext : DbContext
     public virtual DbSet<Catalog> Catalog { get; set; }
     public virtual DbSet<CatalogTOC> CatalogTOC { get; set; }
     public virtual DbSet<TOCProduct> TOCProduct { get; set; }
+    public virtual DbSet<Product> Product { get; set; }
 
     public KITSProductContext(DbContextOptions<KITSProductContext> options)
         : base(options) { }

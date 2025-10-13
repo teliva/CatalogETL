@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System;
 using System.Threading.Tasks;
@@ -18,5 +19,18 @@ public static class MongoDBContext
         var document = BsonDocument.Parse(catalogJson);
 
         await collection.InsertOneAsync(document);
+    }
+
+    public static async Task populateProductsJson(string jsonProducts)
+    {
+        var connectionString = "mongodb://localhost:27017/";
+        var client = new MongoClient(connectionString);
+
+        var database = client.GetDatabase("KITSProduct");
+        var collection = database.GetCollection<BsonDocument>("Product");
+
+        var document = BsonSerializer.Deserialize<List<BsonDocument>>(jsonProducts);
+
+        await collection.InsertManyAsync(document);
     }
 }
