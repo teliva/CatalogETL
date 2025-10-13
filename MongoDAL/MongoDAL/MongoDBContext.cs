@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace MongoDAL;
 
-public class MongoDBContext
+public static class MongoDBContext
 {
-    public async Task populateCatalogJson(string catalogJson)
+    public static async Task populateCatalogJson(string catalogJson)
     {
-        var connectionString = "mongoDb://localhost:27017";
+        var connectionString = "mongodb://localhost:27017/";
         var client = new MongoClient(connectionString);
 
         var database = client.GetDatabase("KITSProduct");

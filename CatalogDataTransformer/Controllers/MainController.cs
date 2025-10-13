@@ -29,7 +29,7 @@ public class MainController
         var cat = await _kpr.GetByIdAsync(catalogId);
     }
 
-    public async Task<IList<CatalogDataTransformer.Models.CatalogTOC>> GetCatalogNodes(int catalogId)
+    public async Task<CatalogDataTransformer.Models.CatalogTOC> GetCatalogNodes(int catalogId)
     {
         var cat = await _kpr.GetCatalogTOCList(catalogId);
         return CatalogMapper.ToDomain(cat);

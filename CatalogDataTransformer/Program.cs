@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Microsoft.Extensions.Configuration;
+using MongoDAL;
 
 try
 {
@@ -14,7 +15,8 @@ try
     MainController mc = new MainController(connectionString);
     var ans = await mc.GetCatalogNodes(1479000001); // Sample KFI catalog, this ID is liable to change
     string jsonString = JsonSerializer.Serialize(ans);
-    Console.WriteLine(jsonString);
+
+    await MongoDBContext.populateCatalogJson(jsonString);
 
     Environment.ExitCode = (int)ExitCodes.Success;
 }

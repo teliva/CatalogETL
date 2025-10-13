@@ -2,10 +2,10 @@ namespace CatalogDataTransformer.Maps;
 
 public static class CatalogMapper
 {
-    public static IList<Models.CatalogTOC> ToDomain(IList<Data.Entities.CatalogTOC> catalogTOCs)
+    public static Models.CatalogTOC? ToDomain(IList<Data.Entities.CatalogTOC> catalogTOCs)
     {
         if (catalogTOCs == null || catalogTOCs.Count == 0)
-            return new List<Models.CatalogTOC>();
+            return null;
 
         var lookup = catalogTOCs.ToDictionary(n => n.NodeId, n => new Models.CatalogTOC
         {
@@ -30,7 +30,7 @@ public static class CatalogMapper
             }
         }
 
-        return roots;
+        return roots[0];
     }
 
     public static Models.TOCProduct ToDomain(Data.Entities.TOCProduct tocProduct)
