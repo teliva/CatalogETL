@@ -29,13 +29,13 @@ public class MainController
         var cat = await _kpr.GetByIdAsync(catalogId);
     }
 
-    public async Task<CatalogDataTransformer.Models.CatalogTOC> GetCatalogNodes(int catalogId)
+    public async Task<CatalogTOC?> GetCatalogNodes(int catalogId)
     {
         var cat = await _kpr.GetCatalogTOCList(catalogId);
         return CatalogMapper.ToDomain(cat);
     }
 
-    public async Task<IList<CatalogDataTransformer.Models.Product>> GetCatalogProducts(int catalogId)
+    public async Task<IList<Product>> GetCatalogProducts(int catalogId)
     {
         var products = await _kpr.GetProductsByCatalog(catalogId);
         return CatalogMapper.ToDomain(products);
