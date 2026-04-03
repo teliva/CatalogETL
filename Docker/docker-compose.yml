@@ -1,0 +1,17 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: sql_server_dev
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrongPassword123!
+    volumes:
+      # Maps your local backup folder to a path inside the container
+      - ./backups:/var/opt/mssql/backup
+      # Optional: Persist data so it survives container deletion
+      - sql_data:/var/opt/mssql/data
+
+volumes:
+  sql_data:

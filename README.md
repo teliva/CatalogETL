@@ -14,7 +14,15 @@ C# Project that will injest Product Catalog data and generate the embeddings.
 ### DBMigration
 Contains scripts for updating Microsoft SQL DB schema.
 
+## Setup
+To setup this projects another document has been created in ./Documents/SETUP.md
 
 
-### Notes
-1. First version of the project is to create a python script that will user BERT to generate vector embeddings for a product search.
+## Goals
+1. Create a command line tool that will allow you to easily vector search data.
+2. Formalize the pipeline to create files for specification objects.
+3. Do data research to invert the tree data structure to simplify for user interaction.
+4. Use text classification to try and create labels for the option structure.
+
+
+
