@@ -14,5 +14,4 @@ WITH MOVE 'Sample_Data' TO '/var/opt/mssql/data/KITSProduct.mdf',
      MOVE 'Sample_Log' TO '/var/opt/mssql/data/KITSProduct_log.ldf';
 ```
 
-git config --global user.name "teliva"
-git config --global user.email "telitsyna.ivan@gmail.com"
+3. Sping up a postgres database.
