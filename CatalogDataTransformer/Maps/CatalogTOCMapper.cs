@@ -1,3 +1,4 @@
+using System.Text;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CatalogDataTransformer.Maps;
@@ -53,9 +54,9 @@ public static class CatalogMapper
         return new Models.Product
         {
             ProductId = p.ProductId,
-            ModelNumber = p.StyleNumber,
-            Description = p.CatalogGenericDescription.Description,
-            EnhancedDescription = p.CatalogGenericDescription.EnhancedDescription
+            ModelNumber = p.StyleNumber, 
+            Description = p.CatalogGenericDescription?.Description ?? string.Empty,
+            EnhancedDescription = p.CatalogGenericDescription?.EnhancedDescription ?? string.Empty
         };
     }
 
