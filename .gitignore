@@ -6,3 +6,4 @@ appsettings.json
 Transformer/__pycache__/mongodal.cpython-314.pyc
 ProductVectorSearchAPI/ProductVectorSearchAPI/appsettings.Development.json
 *.bak
+DataCache/*.json
