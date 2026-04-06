@@ -7,9 +7,11 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=YourStrongPassword123!
+    volumes:
+      - /home/ivan/Repos/CatalogETL/Docker/backups/KITSProduct_20260401_1055PM.bak:/var/opt/mssql/backup/KITSProduct_20260401_1055PM.bak
 
   db:
-    image: postgres:latest
+    image: pgvector/pgvector:pg17
     container_name: postgres_db
     restart: always
     environment:

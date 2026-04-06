@@ -4,5 +4,8 @@ CREATE TABLE Product (
     modelNumber VARCHAR(50),
     pceProduct BOOLEAN,
     description TEXT,
-    enhancedDescription TEXT
+    enhancedDescription TEXT,
+    description_embedding vector(384) 
 );
+
+

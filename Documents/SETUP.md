@@ -14,4 +14,9 @@ WITH MOVE 'Sample_Data' TO '/var/opt/mssql/data/KITSProduct.mdf',
      MOVE 'Sample_Log' TO '/var/opt/mssql/data/KITSProduct_log.ldf';
 ```
 
-3. Sping up a postgres database.
+3. Spin up a postgres database.
+4. Enable the pgvector extension.
+```
+CREATE EXTENSION vector;
+```
+4. Run "create_product_table.sql"
