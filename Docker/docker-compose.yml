@@ -15,6 +15,6 @@ services:
     environment:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mysecretpassword
-      POSTGRES_DB: mydatabase
+      POSTGRES_DB: productdb
     ports:
       - "5432:5432"
