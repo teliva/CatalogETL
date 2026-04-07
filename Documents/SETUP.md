@@ -1,3 +1,7 @@
+# Setup of Databases
+
+### Creating the DBs and their containers
+
 1. Create docker container using the yaml file in /Docker.
 ```
 docker compose up -d
@@ -19,4 +23,7 @@ WITH MOVE 'Sample_Data' TO '/var/opt/mssql/data/KITSProduct.mdf',
 ```
 CREATE EXTENSION vector;
 ```
-4. Run "create_product_table.sql"
+4. Run "create_product_table.sql" against the postgres DB.
+
+
+### Populating data
