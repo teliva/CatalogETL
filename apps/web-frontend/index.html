@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Search</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">Product Search</h1>
+                        <form id="searchForm">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Search for products..." required>
+                                <button class="btn btn-primary" type="submit" id="searchButton">
+                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                    Search
+                                </button>
+                            </div>
+                        </form>
+                        <div id="results" class="mt-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) return;
+
+            const button = document.getElementById('searchButton');
+            const spinner = button.querySelector('.spinner-border');
+            const resultsDiv = document.getElementById('results');
+
+            button.disabled = true;
+            spinner.classList.remove('d-none');
+            resultsDiv.innerHTML = '<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+
+            try {
+                const response = await fetch(`http://localhost:8000/products/search?q=${encodeURIComponent(query)}&limit=10`);
+                if (!response.ok) throw new Error('Search failed');
+
+                const products = await response.json();
+                displayResults(products);
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+            } finally {
+                button.disabled = false;
+                spinner.classList.add('d-none');
+            }
+        });
+
+        function displayResults(products) {
+            const resultsDiv = document.getElementById('results');
+            if (products.length === 0) {
+                resultsDiv.innerHTML = '<div class="alert alert-info">No products found.</div>';
+                return;
+            }
+
+            let html = '<h5>Search Results:</h5><div class="list-group">';
+            products.forEach(product => {
+                html += `
+                    <div class="list-group-item">
+                        <h6 class="mb-1">${product.enhancedDescription || product.description}</h6>
+                        <p class="mb-1">Model: ${product.modelNumber || 'N/A'} | ID: ${product.productId}</p>
+                        <small class="text-muted">Similarity: ${(1 - product.score).toFixed(3)}</small>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            resultsDiv.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
