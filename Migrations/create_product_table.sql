@@ -2,10 +2,10 @@
 CREATE TABLE Product (
     productId INT PRIMARY KEY,
     modelNumber VARCHAR(50),
-    pceProduct BOOLEAN,
+    pceProduct BIT,
     description TEXT,
     enhancedDescription TEXT,
-    description_embedding vector(384) 
+    description_embedding vector(384)
 );
 
 
