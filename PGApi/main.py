@@ -55,13 +55,28 @@ def query_product(product_id: int):
             return cur.fetchone()
 
 
+class ProductSearchResult(Product):
+    score: float
+
+
 def normalize_product(row: dict) -> Product:
     return Product(
-        productId=row["productid"],
+        productId=int(row["productid"]),
         modelNumber=row.get("modelnumber"),
-        pceProduct=bool(row.get("pceproduct")),
+        pceProduct=bool(int(row.get("pceproduct", 0))),
         description=row.get("description"),
         enhancedDescription=row.get("enhanceddescription"),
+    )
+
+
+def normalize_product_search_result(row: dict) -> ProductSearchResult:
+    return ProductSearchResult(
+        productId=int(row["productid"]),
+        modelNumber=row.get("modelnumber"),
+        pceProduct=bool(int(row.get("pceproduct", 0))),
+        description=row.get("description"),
+        enhancedDescription=row.get("enhanceddescription"),
+        score=float(row.get("distance", 0.0)),
     )
 
 
@@ -104,6 +119,24 @@ def generate_description_embeddings():
     return updated
 
 
+def search_products_by_embedding(query_text: str, limit: int = 10):
+    query_embedding = embedding_model.encode([query_text], show_progress_bar=False)[0]
+    vector_literal = f"[{','.join(str(float(x)) for x in query_embedding)}]"
+    db_url = get_database_url()
+    with psycopg.connect(db_url) as conn:
+        with conn.cursor(row_factory=psycopg.rows.dict_row) as cur:
+            cur.execute(
+                "SELECT productid, modelnumber, pceproduct, description, enhanceddescription, "
+                "description_embedding <#> %s::vector AS distance "
+                "FROM product "
+                "WHERE description_embedding IS NOT NULL "
+                "ORDER BY distance ASC "
+                "LIMIT %s",
+                (vector_literal, limit),
+            )
+            return cur.fetchall()
+
+
 def bulk_load_products(products: List[Product]):
     db_url = get_database_url()
     with psycopg.connect(db_url) as conn:
@@ -144,6 +177,18 @@ async def bulk_load(products: List[Product]):
     try:
         loaded = bulk_load_products(products)
         return {"loaded": loaded}
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
+
+
+@app.get("/products/search", response_model=List[ProductSearchResult])
+async def search_products(
+    q: str = Query(..., description="Text query to search product embeddings"),
+    limit: int = Query(10, ge=1, le=100),
+):
+    try:
+        rows = search_products_by_embedding(q, limit)
+        return [normalize_product_search_result(row) for row in rows]
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc))
 
