@@ -1,5 +1,6 @@
 # Ignore VS Code settings
 .vscode/
+.vs/
 obj/
 bin/
 appsettings.json
