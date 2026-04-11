@@ -8,8 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductVectorSearchAPI", "P
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KITSProductData", "KITSProductData", "{E317B654-66CB-7CC7-D145-10D9C13919F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductVectorSearchAPI", "ProductVectorSearchAPI\ProductVectorSearchAPI\ProductVectorSearchAPI.csproj", "{59EDA5CD-27EC-6B36-4F9F-592282DB4A02}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "KITSProductData\Data\Data.csproj", "{62840C2C-9B60-7286-2173-65F4EC842FE7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "KITSProductData\Repository\Repository.csproj", "{680E0462-918A-E0A2-19F8-251D9C8A5EDA}"
