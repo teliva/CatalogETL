@@ -23,7 +23,7 @@ services:
 
   pgapi:
     build:
-      context: ../PGApi
+      context: ../pg-api
       dockerfile: Dockerfile
     container_name: pgapi_service
     restart: always
