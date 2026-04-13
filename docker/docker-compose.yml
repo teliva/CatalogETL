@@ -33,3 +33,12 @@ services:
       DATABASE_URL: postgresql://myuser:mysecretpassword@db:5432/productdb
     ports:
       - "8000:8000"
+
+  webapp:
+    build:
+      context: ../apps/web-app
+      dockerfile: Dockerfile
+    container_name: webapp_service
+    restart: always
+    ports:
+      - "80:80"
