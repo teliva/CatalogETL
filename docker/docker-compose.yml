@@ -40,5 +40,7 @@ services:
       dockerfile: Dockerfile
     container_name: webapp_service
     restart: always
+    volumes:
+      - ../apps/web-app:/usr/share/nginx/html
     ports:
       - "80:80"
